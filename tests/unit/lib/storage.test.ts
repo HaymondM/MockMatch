@@ -48,7 +48,7 @@ describe('Storage Serialization', () => {
             score: 8,
             strengths: ['Good explanation', 'Clear examples'],
             improvements: ['Add more detail', 'Mention use cases'],
-            timestamp: new Date('2024-01-15T10:00:00Z'),
+            timestamp: new Date('2026-01-15T10:00:00Z'),
           },
         ],
       ]),
@@ -65,7 +65,7 @@ describe('Storage Serialization', () => {
       },
       currentQuestionIndex: 1,
       isComplete: false,
-      createdAt: new Date('2024-01-15T09:00:00Z'),
+      createdAt: new Date('2026-01-15T09:00:00Z'),
       completedAt: null,
     };
   });
@@ -91,7 +91,7 @@ describe('Storage Serialization', () => {
       const parsed = JSON.parse(serialized);
 
       expect(typeof parsed.createdAt).toBe('string');
-      expect(parsed.createdAt).toBe('2024-01-15T09:00:00.000Z');
+      expect(parsed.createdAt).toBe('2026-01-15T09:00:00.000Z');
       expect(parsed.completedAt).toBeNull();
     });
 
@@ -101,7 +101,7 @@ describe('Storage Serialization', () => {
 
       const feedbackEntry = parsed.feedback[0][1];
       expect(typeof feedbackEntry.timestamp).toBe('string');
-      expect(feedbackEntry.timestamp).toBe('2024-01-15T10:00:00.000Z');
+      expect(feedbackEntry.timestamp).toBe('2026-01-15T10:00:00.000Z');
     });
   });
 
@@ -132,7 +132,7 @@ describe('Storage Serialization', () => {
       const deserialized = deserializeSession(serialized);
 
       expect(deserialized.createdAt).toBeInstanceOf(Date);
-      expect(deserialized.createdAt.toISOString()).toBe('2024-01-15T09:00:00.000Z');
+      expect(deserialized.createdAt.toISOString()).toBe('2026-01-15T09:00:00.000Z');
       expect(deserialized.completedAt).toBeNull();
     });
 
@@ -143,14 +143,14 @@ describe('Storage Serialization', () => {
       const feedback = deserialized.feedback.get('550e8400-e29b-41d4-a716-446655440001');
       expect(feedback).toBeDefined();
       expect(feedback!.timestamp).toBeInstanceOf(Date);
-      expect(feedback!.timestamp.toISOString()).toBe('2024-01-15T10:00:00.000Z');
+      expect(feedback!.timestamp.toISOString()).toBe('2026-01-15T10:00:00.000Z');
     });
 
     it('should handle completed sessions with completedAt date', () => {
       const completedSession = {
         ...mockSession,
         isComplete: true,
-        completedAt: new Date('2024-01-15T11:00:00Z'),
+        completedAt: new Date('2026-01-15T11:00:00Z'),
       };
 
       const serialized = serializeSession(completedSession);
@@ -158,7 +158,7 @@ describe('Storage Serialization', () => {
 
       expect(deserialized.isComplete).toBe(true);
       expect(deserialized.completedAt).toBeInstanceOf(Date);
-      expect(deserialized.completedAt!.toISOString()).toBe('2024-01-15T11:00:00.000Z');
+      expect(deserialized.completedAt!.toISOString()).toBe('2026-01-15T11:00:00.000Z');
     });
 
     it('should throw error for invalid JSON', () => {
